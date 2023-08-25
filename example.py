@@ -6,9 +6,7 @@ from qrcode_img import QRCode
 text = 'Hello'
 
 path_to_download = Path().joinpath("example", "11.png")
-path_to_save = Path().joinpath(
-    "example", "1example.png"
-)
+path_to_save = Path().joinpath("example", "1example.png")
 
 
 qrcode = QRCode(text)

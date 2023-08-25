@@ -8,7 +8,7 @@ class QRCode:
     WHITE_LINE_BEFORE = (255, 255, 255, 50)
     WHITE_LINE_AFTER = (255, 255, 255, 230)
 
-    def __init__(self, text: str, coeff: int=10) -> None:
+    def __init__(self, text: str, coeff: int = 10) -> None:
         qr = qrcode.QRCode(
             version=1,
             error_correction=qrcode.constants.ERROR_CORRECT_H,
@@ -23,18 +23,16 @@ class QRCode:
         self.length_qr = len(self.img) * self.coeff
         self.back_im = Image.new("RGBA", (self.length_qr, self.length_qr), (0, 0, 0, 0))
         self.idraw = ImageDraw.Draw(self.back_im, "RGBA")
-    
-    def gen_qr_code(self, path_to_download: Path, path_to_save: Path = None) -> bool:
 
+    def gen_qr_code(self, path_to_download: Path, path_to_save: Path = None) -> bool:
         try:
-            background = Image.open(
-                path_to_download
-            ).resize(
-                (self.length_qr, self.length_qr)
-            ).convert("RGBA")
+            background = (
+                Image.open(path_to_download)
+                .resize((self.length_qr, self.length_qr))
+                .convert("RGBA")
+            )
         except:
             return False
-
 
         background = self.__get_qr_code_with_img(background)
         if path_to_save is not None:
@@ -42,7 +40,7 @@ class QRCode:
 
         background.save(path_to_download)
         return True
-    
+
     def __get_qr_code_with_img(self, background):
         x = 0
         y = 0
@@ -89,7 +87,12 @@ class QRCode:
                 self.BLACK_LINE,
             ),
             (
-                (self.length_qr - self.coeff * 8, self.coeff, self.length_qr - self.coeff, self.coeff * 2),
+                (
+                    self.length_qr - self.coeff * 8,
+                    self.coeff,
+                    self.length_qr - self.coeff,
+                    self.coeff * 2,
+                ),
                 self.BLACK_LINE,
             ),
             (
@@ -97,15 +100,30 @@ class QRCode:
                 self.BLACK_LINE,
             ),
             (
-                (self.length_qr - self.coeff * 8, self.coeff * 7, self.length_qr - self.coeff, self.coeff * 8),
+                (
+                    self.length_qr - self.coeff * 8,
+                    self.coeff * 7,
+                    self.length_qr - self.coeff,
+                    self.coeff * 8,
+                ),
                 self.BLACK_LINE,
             ),
             (
-                (self.coeff, self.length_qr - self.coeff * 8, self.coeff * 8, self.length_qr - self.coeff * 7),
+                (
+                    self.coeff,
+                    self.length_qr - self.coeff * 8,
+                    self.coeff * 8,
+                    self.length_qr - self.coeff * 7,
+                ),
                 self.BLACK_LINE,
             ),
             (
-                (self.coeff, self.length_qr - self.coeff * 2, self.coeff * 8, self.length_qr - self.coeff),
+                (
+                    self.coeff,
+                    self.length_qr - self.coeff * 2,
+                    self.coeff * 8,
+                    self.length_qr - self.coeff,
+                ),
                 self.BLACK_LINE,
             ),
             (
@@ -122,11 +140,21 @@ class QRCode:
                 self.BLACK_LINE,
             ),
             (
-                (self.length_qr - self.coeff * 6, self.coeff * 3, self.length_qr - self.coeff * 3, self.coeff * 6),
+                (
+                    self.length_qr - self.coeff * 6,
+                    self.coeff * 3,
+                    self.length_qr - self.coeff * 3,
+                    self.coeff * 6,
+                ),
                 self.BLACK_LINE,
             ),
             (
-                (self.coeff * 3, self.length_qr - self.coeff * 6, self.coeff * 6, self.length_qr - self.coeff * 3),
+                (
+                    self.coeff * 3,
+                    self.length_qr - self.coeff * 6,
+                    self.coeff * 6,
+                    self.length_qr - self.coeff * 3,
+                ),
                 self.BLACK_LINE,
             ),
             (
@@ -138,23 +166,41 @@ class QRCode:
                 self.BLACK_LINE,
             ),
             (
-                (self.length_qr - self.coeff * 2, self.coeff, self.length_qr - self.coeff, self.coeff * 8),
+                (
+                    self.length_qr - self.coeff * 2,
+                    self.coeff,
+                    self.length_qr - self.coeff,
+                    self.coeff * 8,
+                ),
                 self.BLACK_LINE,
             ),
             (
-                (self.length_qr - self.coeff * 8, self.coeff, self.length_qr - self.coeff * 7, self.coeff * 8),
+                (
+                    self.length_qr - self.coeff * 8,
+                    self.coeff,
+                    self.length_qr - self.coeff * 7,
+                    self.coeff * 8,
+                ),
                 self.BLACK_LINE,
             ),
             (
-                (self.coeff, self.length_qr - self.coeff * 8, self.coeff * 2, self.length_qr - self.coeff),
+                (
+                    self.coeff,
+                    self.length_qr - self.coeff * 8,
+                    self.coeff * 2,
+                    self.length_qr - self.coeff,
+                ),
                 self.BLACK_LINE,
             ),
             (
-                (self.coeff * 7, self.length_qr - self.coeff * 8, self.coeff * 8, self.length_qr - self.coeff),
+                (
+                    self.coeff * 7,
+                    self.length_qr - self.coeff * 8,
+                    self.coeff * 8,
+                    self.length_qr - self.coeff,
+                ),
                 self.BLACK_LINE,
             ),
-
-
             (
                 (
                     self.length_qr - self.coeff * 10,
@@ -191,9 +237,7 @@ class QRCode:
                 ),
                 self.BLACK_LINE,
             ),
-
         )
-
 
         for xy, fill in operations:
             self.idraw.rectangle(
