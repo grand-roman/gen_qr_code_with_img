@@ -14,8 +14,8 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/grand-roman/gen_qr_code_with_img",
-    packages=['qrcode_img'],
+    packages=["qrcode_img"],
     install_requires=requirements,
-    python_requires='>=3.6',
+    python_requires=">=3.6",
     zip_safe=False,
 )
