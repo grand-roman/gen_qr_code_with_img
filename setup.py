@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 requirements = ["path>=16.3.0", "Pillow>=9.0.1", "qrcode>=7.3.1"]
 
 setuptools.setup(
-    name="gen-qr-with-img",
+    name="gen_qr_with_img",
     version="1.0.1",
     author="Roman Andreev",
     author_email="grand-roman@yandex.ru",
@@ -14,7 +14,7 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/grand-roman/gen_qr_code_with_img",
-    packages=setuptools.find_packages(),
+    packages=setuptools.find_packages() + ['gen_qr_with_img'],
     install_requires=requirements,
     python_requires='>=3.6',
 )
