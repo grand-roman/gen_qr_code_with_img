@@ -1,6 +1,6 @@
 ## Генерация QR Code по картинке
 
-### https://pypi.org/project/gen-qr-with-img/
+### https://pypi.org/project/qrcode-img/
 
  
 ## Пример работы
