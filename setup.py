@@ -7,7 +7,7 @@ requirements = ["path>=16.3.0", "Pillow>=9.0.1", "qrcode>=7.3.1"]
 
 setuptools.setup(
     name="qrcode_img",
-    version="1.0.4",
+    version="1.0.5",
     author="Roman Andreev",
     author_email="grand-roman@yandex.ru",
     description="Generation QR Code with IMG",
