@@ -3,11 +3,11 @@ import setuptools
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
-requirements = ["Pillow>=9.0.1", "qrcode>=7.3.1"]
+requirements = ["Pillow>=9.0.1", "qrcode>=7.3.1", "requests>=2.31.0"]
 
 setuptools.setup(
     name="qrcode_img",
-    version="1.0.7",
+    version="1.0.8",
     author="Roman Andreev",
     author_email="grand-roman@yandex.ru",
     description="Generation QR Code with IMG",

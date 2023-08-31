@@ -1,6 +1,7 @@
 from io import BytesIO
 
 import qrcode
+import requests
 from PIL import Image, ImageDraw
 
 
@@ -38,11 +39,17 @@ class QRCode:
         self.__background.save(path_to_save)
         return True
 
-    def gen_qr_code(self, path_to_download: str) -> BytesIO:
+    def gen_qr_code(self, link: str, is_url: bool = True) -> BytesIO:
         try:
+            im = requests.get(link, stream=True).raw if is_url else link
             self.__background = (
-                Image.open(path_to_download)
-                .resize((self.__length_qr, self.__length_qr))
+                Image.open(im)
+                .resize(
+                    (
+                        self.__length_qr,
+                        self.__length_qr,
+                    )
+                )
                 .convert("RGBA")
             )
             self.__background = self.__get_qr_code_with_img(self.__background)
