@@ -17,5 +17,9 @@ path_to_save = Path().joinpath("example", "1example.png")
 
 qrcode = QRCode(text)
 
-qrcode.gen_qr_code(path_to_download, path_to_save)
+byte_io = qrcode.gen_qr_code(path_to_download)
+
+print(byte_io)
+
+qrcode.save_qr_code(path_to_save)
 ```
