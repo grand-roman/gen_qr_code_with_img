@@ -1,7 +1,6 @@
 from io import BytesIO
 
 import qrcode
-from path import Path
 from PIL import Image, ImageDraw
 
 
@@ -11,15 +10,14 @@ class QRCode:
     WHITE_LINE_AFTER = (255, 255, 255, 230)
 
     def __init__(self, text: str, coeff: int = 10) -> None:
-        qr = qrcode.QRCode(
+        self.__qr = qrcode.QRCode(
             version=1,
             error_correction=qrcode.constants.ERROR_CORRECT_H,
             box_size=10,
             border=1,
         )
-        qr.add_data(text)
-        qr.make(fit=True)
-        self.__img = qr.get_matrix()
+        self.__qr.add_data(text)
+        self.__img = self.__qr.get_matrix()
         self.__coeff = coeff
         self.__coeff_small = round(self.__coeff / 3)
         self.__length_qr = len(self.__img) * self.__coeff
@@ -30,21 +28,28 @@ class QRCode:
         self.__bytes_io = BytesIO()
         self.__background = None
 
-    def save_qr_code(self, path_to_save: Path = None) -> bool:
+    def save_qr_code(self, path_to_save: str = None) -> bool:
         if self.__background is None:
+            if self.__qr:
+                img = self.__qr.make_image(fill_color="black", back_color="white")
+                img.save(path_to_save)
+                return True
             return False
         self.__background.save(path_to_save)
         return True
 
-    def gen_qr_code(self, path_to_download: Path) -> BytesIO | None:
+    def gen_qr_code(self, path_to_download: str) -> BytesIO:
         try:
             self.__background = (
                 Image.open(path_to_download)
                 .resize((self.__length_qr, self.__length_qr))
                 .convert("RGBA")
             )
+            self.__background = self.__get_qr_code_with_img(self.__background)
         except:
-            return None
+            img = self.__qr.make_image(fill_color="black", back_color="white")
+            img.save(self.__bytes_io, format="PNG")
+            return self.__bytes_io
 
         self.__background = self.__get_qr_code_with_img(self.__background)
 
